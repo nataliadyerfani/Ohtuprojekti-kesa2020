@@ -1,0 +1,27 @@
+#https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
+
+# The environment is set up in src-folder, run all commands in src-folder
+
+# Environment is created with (requires python3.3+)
+python3 -m venv env
+
+# ADD env-directory to gitignore!!
+
+# Activate virtual environment
+source env/bin/activate
+python --version
+Python 3.6.9
+
+# Install packages/libraries to the environment
+pip install package_name==version-num
+
+# Requirements file
+# Install all packages from requirements.txt
+pip install -r requirements.txt
+
+# Save requirements to file (freeze)
+pip freeze
+
+# Leaving virtual environment
+deactivate
+
