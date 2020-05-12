@@ -1,4 +1,5 @@
 # image downloaded from: https://www.apa.org/monitor/2020/04/nurtured-nature
+# code from https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html#goals
 
 import cv2
 import numpy as np
@@ -86,11 +87,9 @@ def read_img():
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-
-
 def main():
     # exit all methods with pressing q
-    #show_image()
+    # show_image()
     show_video()
     #record_video()
     #read_img()
