@@ -22,3 +22,13 @@ or
 
 ## Leave virtual environment
 `deactivate`
+
+# Arguments for live_detect.py
+
+## Define tensorflow model (default: detect.tflite)
+
+'-m modelname.tflite'
+
+## Define labelmap for model (default: labelmap.txt)
+
+'-l labelmap.txt'
