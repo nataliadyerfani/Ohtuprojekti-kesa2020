@@ -27,8 +27,8 @@ or
 
 ## Define tensorflow model (default: detect.tflite)
 
-'-m modelname.tflite'
+`-m modelname.tflite`
 
 ## Define labelmap for model (default: labelmap.txt)
 
-'-l labelmap.txt'
+`-l labelmap.txt`
