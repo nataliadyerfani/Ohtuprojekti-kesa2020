@@ -19,6 +19,7 @@ jobs:
     - run: python3 -m unittest
     - run: pwd
     - run: cd ..
+    - run: sudo apt update
     - run: sudo apt install yapf
     - run: yapf -ri ./src
 
