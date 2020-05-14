@@ -17,9 +17,6 @@ jobs:
     - run: pip install -r requirements.txt
     - run: 
         command: |
-          pwd
           cd tests
-          pwd
           python3 -m unittest
-    - run: yapf -ri ./src
 

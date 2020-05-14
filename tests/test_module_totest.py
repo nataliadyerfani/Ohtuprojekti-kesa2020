@@ -33,7 +33,5 @@ class TestSum(unittest.TestCase):
         '''
         self.assertEqual(calculate_sum(range(10)), 45, 'Should be 45')
 
-
-
 if __name__ == '__main__':
     unittest.main()
