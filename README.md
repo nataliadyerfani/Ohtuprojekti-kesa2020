@@ -33,6 +33,9 @@ or
 
 `-l labelmap.txt`
 
+## Define a webcamera's ID (default: 0)
+'-c camera_id'
+
 # Testing
 Unit testing with python builtin unittest library. Run with:
 ```console
