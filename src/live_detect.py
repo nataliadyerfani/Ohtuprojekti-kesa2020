@@ -13,6 +13,7 @@ DEFAULT_VIDEO_ID = 0
 DEFAULT_MODEL = 'detect.tflite'
 DEFAULT_LABELS = 'labelmap.txt'
 
+
 def show_image():
     '''
     Load and convert an image from disk to grayscale. draw a line and show the result. OpenCV with pyplot
