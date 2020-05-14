@@ -43,3 +43,8 @@ cd tests
 python3 -m unittest
 ```
 Add -v flag for verbose output
+
+# Formatting
+Run [yapf](https://github.com/google/yapf/) before commits `yapf -ri src/`
+
+[pep8 style guide](https://www.python.org/dev/peps/pep-0008/)
