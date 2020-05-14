@@ -38,7 +38,7 @@ def show_video():
 
     while True:
         # ret is boolean indicating if we have any image returnedor not.
-        ret, frame = cap.read()  
+        ret, frame = cap.read()
         # convert frame to grayscale. Opencv uses BGR-colors as oposed to RGB
         #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -98,9 +98,11 @@ def detect_objects():
         for i in range(6):
             print(f'{labels[classes[0][i]]:10} {scores[0][i]}')
 
+
 def load_labels(filename):
     with open(filename, 'r') as f:
         return [line.strip() for line in f.readlines()]
+
 
 def record_video():
     '''
@@ -121,6 +123,7 @@ def record_video():
     cap.release()
     out.release()
     cv2.destroyAllWindows()
+
 
 def read_img():
     '''

@@ -3,7 +3,6 @@ import numpy as np
 
 
 class Camera:
-
     def __init__(self, cam_id):
         """Video dimensions and camera ID defined at construction."""
         self.camera_id = cam_id
