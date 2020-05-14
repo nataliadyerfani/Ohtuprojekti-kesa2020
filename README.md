@@ -6,6 +6,10 @@
 ## Activate virtual environment
 `source env/bin/activate`
 
+## First of all update pip
+Tensorflow 2.2 requires pip version >=19  
+`pip install --upgrade pip`
+
 ## Install packages from requirements.txt
 `pip install -r requirements.txt`
 
