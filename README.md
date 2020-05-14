@@ -42,7 +42,16 @@ Unit testing with python builtin unittest library. Run with:
 cd tests
 python3 -m unittest
 ```
-Add -v flag for verbose output
+Add -v flag for verbose output  
+Run single test module:
+```console
+cd tests
+python3 -m unittest modulename
+```
+Run all modules in a directory called tests:
+```console
+python3 -m unittest discover -s tests
+```
 
 # Formatting
 Run [yapf](https://github.com/google/yapf/) before commits `yapf -ri src/`
