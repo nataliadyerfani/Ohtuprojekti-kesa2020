@@ -15,9 +15,11 @@ jobs:
     - run: . env/bin/activate
     - run: pip install --upgrade pip
     - run: pip install -r requirements.txt
-    - run: pwd
-    - run: cd tests
-    - run: python3 -m unittest
-    - run: cd ..
+    - run: 
+      command: |
+        pwd
+        cd tests
+        pwd
+        python3 -m unittest
     - run: yapf -ri ./src
 
