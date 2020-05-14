@@ -37,8 +37,8 @@ def show_video():
     cap = cv2.VideoCapture(args.camera_id)
 
     while True:
-        ret, frame = cap.read(
-        )  #ret is boolean indicating if we have any image returned, will be None if no image is returned
+        # ret is boolean indicating if we have any image returnedor not.
+        ret, frame = cap.read()  
         # convert frame to grayscale. Opencv uses BGR-colors as oposed to RGB
         #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -67,18 +67,18 @@ def detect_objects():
     labels = load_labels(args.label_file)
 
     while True:
-        # get frame from camera
+        # Get frame from camera.
         img = cam.frameRGB()
 
-        # display the frame
+        # Display the frame.
         cv2.imshow('frame', img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-        # resize to the size the model is trained on
+        # Resize to the size the model is trained on.
         img = np.resize(img, (width, height, 3))
 
-        # add N dim
+        # Add N dim.
         input_data = np.expand_dims(img, axis=0)
 
         if floating_model:
@@ -98,11 +98,9 @@ def detect_objects():
         for i in range(6):
             print(f'{labels[classes[0][i]]:10} {scores[0][i]}')
 
-
 def load_labels(filename):
     with open(filename, 'r') as f:
         return [line.strip() for line in f.readlines()]
-
 
 def record_video():
     '''
@@ -123,7 +121,6 @@ def record_video():
     cap.release()
     out.release()
     cv2.destroyAllWindows()
-
 
 def read_img():
     '''
