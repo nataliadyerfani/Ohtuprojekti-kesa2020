@@ -5,6 +5,9 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
+# Module to experiment with tests
+from module_totest import calculate_sum
+
 def show_image():
     '''
     Load and convert an image from disk to grayscale. draw a line and show the result. OpenCV with pyplot
@@ -90,9 +93,12 @@ def read_img():
 def main():
     # exit all methods with pressing q
     # show_image()
-    show_video()
+    #show_video()
     #record_video()
     #read_img()
+
+    
+    print(calculate_sum([1,2,3]))
 
 if __name__ == '__main__':
     main()

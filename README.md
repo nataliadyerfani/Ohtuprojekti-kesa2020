@@ -32,3 +32,11 @@ or
 ## Define labelmap for model (default: labelmap.txt)
 
 `-l labelmap.txt`
+
+# Testing
+Unit testing with python builtin unittest library. Run with:
+```console
+cd tests
+python3 -m unittest
+```
+Add -v flag for verbose output
