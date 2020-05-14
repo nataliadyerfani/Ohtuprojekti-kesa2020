@@ -7,8 +7,9 @@ from matplotlib import pyplot as plt
 import argparse
 from PIL import Image
 import tensorflow as tf
+import Camera
 
-VIDEO_DEVICE_ID = 0
+DEFAULT_VIDEO_ID = 0
 DEFAULT_MODEL = 'detect.tflite'
 DEFAULT_LABELS = 'labelmap.txt'
 
@@ -30,22 +31,23 @@ def show_image():
     #cv2.imwrite('naturegray.png', img) #save image
 
 def show_video():
-    cap = cv2.VideoCapture(VIDEO_DEVICE_ID)
+
+    cap = cv2.VideoCapture(args.camera_id)
 
     while True:
         ret, frame = cap.read() #ret is boolean indicating if we have any image returned, will be None if no image is returned
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # convert frame to grayscale. Opencv uses BGR-colors as oposed to RGB
+        #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         cv2.imshow('frame', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-        detect_objects(frame)
 
     cap.release()
     cv2.destroyAllWindows()
 
-def detect_objects(img):
+
+def detect_objects():
     interpreter = tf.lite.Interpreter(model_path=args.model_file)
     interpreter.allocate_tensors()
 
@@ -57,37 +59,39 @@ def detect_objects(img):
     # NxHxWxC, H:1, W:2
     height = input_details[0]['shape'][1]
     width = input_details[0]['shape'][2]
-    #img = Image.open(args.image).resize((width, height))
-    #img = img.resize(width, height)
-    img = np.resize(img, (width, height, 3))
 
-
-    # add N dim
-    input_data = np.expand_dims(img, axis=0)
-
-    
-    if floating_model:
-        input_data = (np.float32(input_data) - args.input_mean) / args.input_std
-
-
-    interpreter.set_tensor(input_details[0]['index'], input_data)
-
-    interpreter.invoke()
-
-    output_data = interpreter.get_tensor(output_details[0]['index'])
-    results = np.squeeze(output_data)
-
+    cam = Camera.Camera(int(args.camera_id))
     labels = load_labels(args.label_file)
 
-    classes = interpreter.get_tensor(output_details[1]['index']).astype(int)
-    #print(classes)
-    scores = interpreter.get_tensor(output_details[2]['index'])
-    #print(scores)
-    print("Classes and scores:") 
+    while True:
+        # get frame from camera
+        img = cam.frameRGB()
 
-    for i in range(6):
-      print(f'{labels[classes[0][i]]:10} {scores[0][i]}')
+        # display the frame
+        cv2.imshow('frame', img)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
+        # resize to the size the model is trained on
+        img = np.resize(img, (width, height, 3))
+
+        # add N dim
+        input_data = np.expand_dims(img, axis=0)
+
+        if floating_model:
+            input_data = (np.float32(input_data) - args.input_mean) / args.input_std
+
+        interpreter.set_tensor(input_details[0]['index'], input_data)
+        interpreter.invoke()
+
+        output_data = interpreter.get_tensor(output_details[0]['index'])
+        results = np.squeeze(output_data)
+
+        classes = interpreter.get_tensor(output_details[1]['index']).astype(int)
+        scores = interpreter.get_tensor(output_details[2]['index'])
+        print("Classes and scores:") 
+        for i in range(6):
+          print(f'{labels[classes[0][i]]:10} {scores[0][i]}')
 
 def load_labels(filename):
     with open(filename, 'r') as f:
@@ -146,9 +150,10 @@ def read_img():
 def main():
     # exit all methods with pressing q
     # show_image()
-    show_video()
+    #show_video()
     #record_video()
     #read_img()
+    detect_objects()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -170,6 +175,12 @@ if __name__ == '__main__':
         '--input_std',
         default=127.5, type=float,
         help='input standard deviation')
+    parser.add_argument(
+        '-c',
+        '--camera_id',
+        default=DEFAULT_VIDEO_ID,
+        help='number of the a webcamera')
+
     args = parser.parse_args()
 
 
