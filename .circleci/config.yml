@@ -18,10 +18,11 @@ jobs:
         command: |
           sudo pip install pipenv
           pipenv install
+          pipenv shell
     - run: 
         command: |
           cd tests
-          pipenv run coverage run -m unittest discover
-          pipenv run coverage xml
+          coverage run -m unittest discover
+          coverage xml
     - codecov/upload:
           file: "./tests/coverage.xml"
