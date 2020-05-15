@@ -11,11 +11,11 @@ jobs:
     - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7.7/site-packages
     - run: sudo apt install tree
     - run: tree
-    - run: |
-      sudo pip install pipenv
-      pipenv install
+    - run:
+        command: |
+          sudo pip install pipenv
+          pipenv install
     - run: 
         command: |
           cd tests
           pipenv run python -m unittest
-
