@@ -25,4 +25,4 @@ jobs:
           coverage run -m unittest discover
           coverage xml
     - codecov/upload:
-        file: {{ "./tests/coverage.xml" }}
+        file: "./tests/coverage.xml"
