@@ -5,7 +5,6 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import argparse
-from PIL import Image
 import tensorflow as tf
 import Camera
 
@@ -71,6 +70,7 @@ def detect_objects():
         img = cam.frameRGB()
 
         # Display the frame.
+        print(img.shape)
         cv2.imshow('frame', img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -91,9 +91,10 @@ def detect_objects():
         output_data = interpreter.get_tensor(output_details[0]['index'])
         results = np.squeeze(output_data)
 
-        classes = interpreter.get_tensor(
-            output_details[1]['index']).astype(int)
+        classes = interpreter.get_tensor(output_details[1]['index']).astype(int)
         scores = interpreter.get_tensor(output_details[2]['index'])
+        nro = interpreter.get_tensor(output_details[0]['index'])
+        print(nro.shape)
         print("Classes and scores:")
         for i in range(6):
             print(f'{labels[classes[0][i]]:10} {scores[0][i]}')
