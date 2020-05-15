@@ -12,5 +12,5 @@ __pycache__/
 
 #Test coverage files
 
-.coverage
+*.coverage
 coverage.xml
