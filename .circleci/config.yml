@@ -25,4 +25,3 @@ jobs:
           pipenv run coverage xml
     - codecov/upload:
           file: "./tests/coverage.xml"
-  
