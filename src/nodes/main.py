@@ -2,7 +2,6 @@ import argparse
 import camera_node
 import object_detection_node
 from matplotlib import pyplot as plt
-from PIL import Image
 import cv2
 
 

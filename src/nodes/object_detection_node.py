@@ -1,5 +1,4 @@
 import numpy as np
-from PIL import Image
 import tensorflow as tf
 
 DEFAULT_VIDEO_ID = 0
