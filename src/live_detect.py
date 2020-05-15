@@ -70,7 +70,6 @@ def detect_objects():
         img = cam.frameRGB()
 
         # Display the frame.
-        print(img.shape)
         cv2.imshow('frame', img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -93,8 +92,6 @@ def detect_objects():
 
         classes = interpreter.get_tensor(output_details[1]['index']).astype(int)
         scores = interpreter.get_tensor(output_details[2]['index'])
-        nro = interpreter.get_tensor(output_details[0]['index'])
-        print(nro.shape)
         print("Classes and scores:")
         for i in range(6):
             print(f'{labels[classes[0][i]]:10} {scores[0][i]}')
