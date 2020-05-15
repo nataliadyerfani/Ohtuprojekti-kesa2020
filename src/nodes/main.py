@@ -18,8 +18,8 @@ def main():
         frame = camera.frameRGB()
         display_image(frame)
         results = detect_node.detect_objects_in_frame(frame)
-        #print_detected_classes(results, labels)
-        print_if_over(results, labels, 0.7)
+        print_detected_classes(results, labels)
+        #print_if_over(results, labels, 0.7)
 
 def display_image(frame):
     cv2.imshow('frame', frame)
