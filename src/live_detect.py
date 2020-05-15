@@ -18,7 +18,7 @@ def show_image():
     '''
     Load and convert an image from disk to grayscale. draw a line and show the result. OpenCV with pyplot
     '''
-    img = cv2.imread('nature.png', cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread('images/nature.png', cv2.IMREAD_GRAYSCALE)
     #cv2.imshow('image', img)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
@@ -129,7 +129,7 @@ def read_img():
     '''
     OpenCV
     '''
-    img = cv2.imread('nature.png', cv2.IMREAD_COLOR)
+    img = cv2.imread('images/nature.png', cv2.IMREAD_COLOR)
 
     #x,y, start coords, end coords, color (bgr), line thickness
     cv2.line(img, (0, 0), (130, 130), (255, 255, 255), 10)
