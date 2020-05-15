@@ -5,11 +5,12 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-import configuration
+import configuration as conf
+from tools import filereaderwriter as fileio
 
 #path = 'images/face_front.jpg'
-path = '/'.join([configuration.paths['PATH_IMAGES'], 'face_front.jpg'])
-
+#path = '/'.join([conf.paths['PATH_IMAGES'], 'face_front.jpg'])
+path = fileio.build_path(conf.paths['PATH_IMAGES'], 'face_front.jpg')
 font = cv2.FONT_HERSHEY_DUPLEX
 face_cascade = cv2.CascadeClassifier(
     'data/haarcascade_frontalface_default.xml')
