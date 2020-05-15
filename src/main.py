@@ -5,10 +5,11 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-# Module to experiment with tests
-# from module_totest import calculate_sum
+import configuration
 
-path = 'images/face_front.jpg'
+#path = 'images/face_front.jpg'
+path = '/'.join([configuration.paths['PATH_IMAGES'], 'face_front.jpg'])
+
 font = cv2.FONT_HERSHEY_DUPLEX
 face_cascade = cv2.CascadeClassifier(
     'data/haarcascade_frontalface_default.xml')
@@ -196,9 +197,7 @@ def main():
     # show_video()
     # record_video()
     # read_img()
-    # detect_faces_from_video()
-
-    print(calculate_sum([1, 2, 3]))
+    detect_faces_from_video()
 
 
 if __name__ == '__main__':
