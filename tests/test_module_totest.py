@@ -33,12 +33,5 @@ class TestSum(unittest.TestCase):
         '''
         self.assertEqual(calculate_sum(range(10)), 45, 'Should be 45')
 
-    def test_sum_failing(self):
-        '''
-        Test with integer list and assert to wrong expected->fails
-        '''
-        self.assertEqual(calculate_sum([1, 2]), 1, 'Should be 3, not 1')
-
-
 if __name__ == '__main__':
     unittest.main()
