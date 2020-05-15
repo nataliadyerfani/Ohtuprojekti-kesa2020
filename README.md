@@ -1,17 +1,31 @@
-## Commands for virtual environment
-[pipenv](https://github.com/pypa/pipenv) is used for managing dependencies
+# Commands for virtual environment
 
-#### Creating virtual environment
-`pipenv install`
+## Create virtuan environment
+`python3 -m venv env`
 
-#### Activate virtual environment
-`pipenv shell`
-or `pipenv run <command>` to run a single command in the environment
-#### More
-[pipenv usage](https://github.com/pypa/pipenv#-usage)
+## Activate virtual environment
+`source env/bin/activate`
+
+## First of all update pip
+Tensorflow 2.2 requires pip version >=19  
+`pip install --upgrade pip`
+
+## Install packages from requirements.txt
+`pip install -r requirements.txt`
+
+## Install more packages/libraries to the environment
+`pip install package_name==version-num`
+or
+`pip install package_name`
 
 ## Start main.py
-`python src/main.py`
+`python3 src/main.py`
+
+## Save requirements to file (freeze)
+`pip freeze > requirements.txt`
+
+## Leave virtual environment
+`deactivate`
 
 # Arguments for live_detect.py
 
