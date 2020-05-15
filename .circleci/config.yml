@@ -11,7 +11,7 @@ jobs:
     - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
     - run: sudo apt install tree
     - run: tree
-    - run: echo CODECOV_TOKEN
+    - run: CODECOV_TOKEN
     - run: python3 -m venv env
     - run: . env/bin/activate
     - run: pip install --upgrade pip
