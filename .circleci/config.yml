@@ -22,7 +22,7 @@ jobs:
     - run: 
         command: |
           cd tests
-          python3 -m unittest
-          coverage run test_module_totest.py
+          coverage run -m unittest discover
+          coverage xml
     - codecov/upload:
-        file: {{ ./.coverage }}
+        file: {{ ./tests/coverage.xml }}
