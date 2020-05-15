@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@1.0.2
+
 jobs:
   build:
     working_directory: ~/repository
@@ -20,4 +23,6 @@ jobs:
         command: |
           cd tests
           python3 -m unittest
-
+          coverage run test_module_totest.py
+    - codecov/upload:
+        file: {{ ./.coverage }}
