@@ -3,35 +3,20 @@
 import os
 import sys
 
-from typing import List, Tuple
+from typing import List
 from pathlib import Path
 
 
-def read_settings(file_path: str, comment_sign: str = '#', assignment_sign: str = '=') -> List[Tuple[str,str]]:
-    f'''Reads one file containing the various settings to be used in this application.
-    File should be of the following format:
-    variable1=value
-    variablen=value
-    That is one variable with the specified setting per line. Empty and comment lines are ignored.
-    Returns a list containing every variable and value. If the file does not exist, returns an empty list.
+def read_file_lines(file_path: str) -> List[str]:
+    '''Reads one file, strips newline endings and returns a list with the rows of the file.
+    If the file can't be opened an error message will be printed and an empty list will be returned.
     '''
-    settings = []
-
     if not check_file_exists(file_path):
-        return settings
-
+        print(f'Error while trying to read file: \'{file_path}\'.')
+        return []
     with open(file_path, 'r') as f:
-        for l in f.readlines():
-            #l = l.strip()
-            
-            # Skip empty, faulty and commentlines
-            # Valid lines contains exactly one assignment sign: =
-            if not l or l.startswith(comment_sign) or l.count(assignment_sign) != 1:
-                continue
-            
-            settings.append(tuple(map(str.strip, l.split(assignment_sign))))
-    
-    return settings
+        lines = f.read().splitlines()
+    return lines
 
 
 def check_directory_exists(path: str) -> bool:
@@ -44,13 +29,13 @@ def check_file_exists(path: str) -> bool:
     return os.path.isfile(path)
 
 
-def create_directory(path: str) -> None:
+def create_directory(path: str) -> bool:
     '''Creates a directory with all subdirectories.
     Raises exception and quits the application if directory could not be created.'''
     try:
         os.makedirs(path)
     except Exception as e:
-        print(f'Error while trying to create directory \'{path}\'')
+        print(f'Error while trying to create directory \'{path}\'.')
         print(e)
         print('Exiting..')
         sys.exit()
