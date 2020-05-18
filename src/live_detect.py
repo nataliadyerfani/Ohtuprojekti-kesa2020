@@ -5,7 +5,6 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import argparse
-from PIL import Image
 import tensorflow as tf
 import Camera
 
