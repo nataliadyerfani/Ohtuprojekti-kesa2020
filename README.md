@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/kordaniel/Ohtuprojekti-kesa2020.svg?style=svg)](https://circleci.com/gh/kordaniel/Ohtuprojekti-kesa2020)
+
+[![codecov](https://codecov.io/gh/kordaniel/Ohtuprojekti-kesa2020/branch/master/graph/badge.svg)](https://codecov.io/gh/kordaniel/Ohtuprojekti-kesa2020)
+
 ## Commands for virtual environment
 [pipenv](https://github.com/pypa/pipenv) is used for managing dependencies
 
