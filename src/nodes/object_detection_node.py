@@ -43,10 +43,11 @@ class ObjectDetectionNode:
         # Set the value of the input tensor.
         self.interpreter.set_tensor(self.input_details[0]['index'], input_data)
         self.interpreter.invoke()
-        
+
         output_data = []
         for i in range(4):
-            output_data.append(self.interpreter.get_tensor(self.output_details[i]['index']))
+            output_data.append(
+                self.interpreter.get_tensor(self.output_details[i]['index']))
 
         return output_data
 

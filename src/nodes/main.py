@@ -4,14 +4,15 @@ import object_detection_node
 from matplotlib import pyplot as plt
 import cv2
 
-
 DEFAULT_VIDEO_ID = 0
 DEFAULT_MODEL = 'detect.tflite'
 DEFAULT_LABELS = 'labelmap.txt'
 
+
 def main():
     camera = camera_node.Camera(int(args.camera_id))
-    detect_node = object_detection_node.ObjectDetectionNode(args.model_file, args.label_file)
+    detect_node = object_detection_node.ObjectDetectionNode(
+        args.model_file, args.label_file)
     labels = detect_node.get_labels()
     while True:
         frame = camera.frameRGB()
@@ -19,6 +20,7 @@ def main():
         results = detect_node.detect_objects_in_frame(frame)
         print_detected_classes(results, labels)
         #print_if_over(results, labels, 0.7)
+
 
 def display_image(frame):
     cv2.imshow('frame', frame)
@@ -32,7 +34,9 @@ def print_if_over(results, labels, x):
     """
     for i in range(10):
         if results[2][0][i] > x:
-            print(f'{labels[results[1][0][i].astype(int)]:15} {results[2][0][i]}')
+            print(
+                f'{labels[results[1][0][i].astype(int)]:15} {results[2][0][i]}'
+            )
         else:
             break
 
@@ -77,4 +81,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     main()
-

@@ -8,7 +8,7 @@ class Camera:
         Video dimensions and camera ID defined at construction.
         """
         self.set_camera_id(cam_id)
-        
+
     def set_camera_id(self, cam_id):
         self.camera_id = cam_id
         self.cap = cv2.VideoCapture(self.camera_id)
