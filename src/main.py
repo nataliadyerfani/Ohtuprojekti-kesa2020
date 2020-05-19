@@ -5,15 +5,15 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-import configuration as conf
+from configuration import Configuration
 from tools import filereaderwriter as fileio
 
-#path = 'images/face_front.jpg'
+path = 'images/face_front.jpg'
 #path = '/'.join([conf.paths['PATH_IMAGES'], 'face_front.jpg'])
-path = fileio.build_path(conf.paths['PATH_IMAGES'], 'face_front.jpg')
+#path = fileio.build_path(conf.paths['PATH_IMAGES'], 'face_front.jpg')
 font = cv2.FONT_HERSHEY_DUPLEX
-face_cascade = cv2.CascadeClassifier(
-    'data/haarcascade_frontalface_default.xml')
+
+face_cascade = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
 eye_cascade = cv2.CascadeClassifier('data/haarcascade_eye.xml')
 
 
@@ -198,7 +198,9 @@ def main():
     # show_video()
     # record_video()
     # read_img()
-    detect_faces_from_video()
+    #detect_faces_from_video()
+    #configuration = Configuration(False)
+    config = Configuration()
 
 
 if __name__ == '__main__':

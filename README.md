@@ -13,6 +13,7 @@ or `pipenv run <command>` to run a single command in the environment
 [pipenv usage](https://github.com/pypa/pipenv#-usage)
 
 ## Start main.py
+When the application is run, it checks for various needed directories and if they are not found, creates them. Therefore it should always be run from the root directory.
 `python src/main.py`
 
 # Arguments for live_detect.py
