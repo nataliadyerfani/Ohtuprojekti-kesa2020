@@ -20,5 +20,6 @@ jobs:
         command: |
           pipenv run coverage run -m unittest discover
           pipenv run coverage xml
+          pipenv run yapf -rd .
     - codecov/upload:
           file: "./coverage.xml"

@@ -15,8 +15,10 @@ __pycache__/
 .coverage
 *.coverage
 coverage.xml
+htmlcov/
 
 # Tensorflow model files
 
 detect.tflite
 labelmap.txt
+
