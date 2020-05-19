@@ -18,9 +18,8 @@ jobs:
           pipenv install
     - run: 
         command: |
-          pipenv shell
-          run coverage run -m unittest discover
-          run coverage xml
-          yapf -rd .
+          pipenv run coverage run -m unittest discover
+          pipenv run coverage xml
+          pipenv run yapf -rd .
     - codecov/upload:
           file: "./coverage.xml"
