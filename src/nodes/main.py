@@ -12,15 +12,21 @@ DEFAULT_LABELS = 'labelmap.txt'
 
 def main():
     camera = camera_node.Camera(int(args.camera_id))
+    # Using the tensorflow object detection
     detect_node = object_detection_node.ObjectDetectionNode(
         args.model_file, args.label_file)
     labels = detect_node.get_labels()
+    # Using the QR code detection
+    # detect_node = qr_node.QRCodeNode();
     while True:
+        # Get a new RGB frame from the camera node
         frame = camera.frameRGB()
+        # Process the frame with the detect node
+        results = detect_node.process_frame(frame)
+        # Display the frame
         display_image(frame)
-        results = detect_node.detect_objects_in_frame(frame)
+        # Display the results
         print_detected_classes(results, labels)
-        #print_if_over(results, labels, 0.7)
 
 
 def display_image(frame):

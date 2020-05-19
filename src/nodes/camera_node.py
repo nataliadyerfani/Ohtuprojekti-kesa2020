@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
+import camera_node_interface
 
 
-class Camera:
+class Camera(camera_node_interface.CameraNodeInterface):
     def __init__(self, cam_id: int):
         """
         Video dimensions and camera ID defined at construction.
