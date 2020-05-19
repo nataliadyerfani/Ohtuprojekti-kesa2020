@@ -122,8 +122,8 @@ def initialize() -> None:
     initialize_directories()
     load_settings_from_file()
     print('All loaded!')
+    is_initialized = True
 
 
 if not is_initialized:
     initialize()
-    is_initialized = True

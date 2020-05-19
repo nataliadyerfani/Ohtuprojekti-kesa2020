@@ -33,8 +33,9 @@ def create_directory(path: str) -> bool:
     '''Creates a directory with all subdirectories.
     Raises exception and quits the application if directory could not be created.'''
     try:
-        os.makedirs(path)
-    except Exception as e:
+        os.makedirs(path,
+                    exist_ok=True)  # Dont raise an exception if dir exists
+    except OSError as e:
         print(f'Error while trying to create directory \'{path}\'.')
         print(e)
         print('Exiting..')
