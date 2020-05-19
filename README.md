@@ -38,7 +38,7 @@ Add -v flag after `unittest` for verbose output
 Run tests and generate coverage report
 ```console
 coverage run -m unittest discover
-coverage xml
+coverage html
 ```
 
 # Create test
