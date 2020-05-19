@@ -29,20 +29,16 @@ or `pipenv run <command>` to run a single command in the environment
 `-c camera_id`
 
 # Testing
-Unit testing with python builtin unittest library. Run with:
+Run all tests from root folder:
 ```console
-cd tests
-python3 -m unittest
+python -m unittest
 ```
-Add -v flag for verbose output  
-Run single test module:
+Add -v flag after `unittest` for verbose output  
+
+Run tests and generate coverage report
 ```console
-cd tests
-python3 -m unittest modulename
-```
-Run all modules in a directory called tests:
-```console
-python3 -m unittest discover -s tests
+coverage run -m unittest discover
+coverage xml
 ```
 
 # Formatting

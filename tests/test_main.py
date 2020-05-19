@@ -1,6 +1,6 @@
 
 import sys
-sys.path.append('../src')
+sys.path.append('./src')
 import unittest
 import cv2
 from main import check_video
