@@ -3,17 +3,17 @@ import numpy as np
 
 
 class Camera:
-    def __init__(self, cam_id):
+    def __init__(self, cam_id: int):
         """
         Video dimensions and camera ID defined at construction.
         """
         self.set_camera_id(cam_id)
 
-    def set_camera_id(self, cam_id):
+    def set_camera_id(self, cam_id: int):
         self.camera_id = cam_id
         self.cap = cv2.VideoCapture(self.camera_id)
 
-    def frameRGB(self):
+    def frameRGB(self) -> np.ndarray:
         """
         Return the newest frame from the camera as a 3 dimensional numpy array.
             """

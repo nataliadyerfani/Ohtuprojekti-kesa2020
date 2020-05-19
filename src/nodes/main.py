@@ -3,6 +3,7 @@ import camera_node
 import object_detection_node
 from matplotlib import pyplot as plt
 import cv2
+from typing import List
 
 DEFAULT_VIDEO_ID = 0
 DEFAULT_MODEL = 'detect.tflite'
@@ -27,7 +28,7 @@ def display_image(frame):
     cv2.waitKey(1)
 
 
-def print_if_over(results, labels, x):
+def print_if_over(results: List, labels: List[str], x: float):
     """
     Print out an object when it is detected with over x% probability, 
     with values of x between 0 and 1.
@@ -41,7 +42,7 @@ def print_if_over(results, labels, x):
             break
 
 
-def print_detected_classes(results, labels):
+def print_detected_classes(results: List, labels: List[str]):
     """
     Print out all 10 possible detected objects and their probabilities.
     """

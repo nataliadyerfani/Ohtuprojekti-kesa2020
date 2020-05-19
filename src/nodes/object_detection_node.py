@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+from typing import List
 
 DEFAULT_VIDEO_ID = 0
 DEFAULT_MODEL = 'detect.tflite'
@@ -7,10 +8,10 @@ DEFAULT_LABELS = 'labelmap.txt'
 
 
 class ObjectDetectionNode:
-    def __init__(self, model_file, label_file):
+    def __init__(self, model_file: str, label_file: str):
         self.set_model(model_file, label_file)
 
-    def set_model(self, model_file, label_file):
+    def set_model(self, model_file: str, label_file: str):
         """
         Define the model and label filename to use for object detection.
         """
@@ -25,7 +26,7 @@ class ObjectDetectionNode:
         self.height = self.input_details[0]['shape'][1]
         self.width = self.input_details[0]['shape'][2]
 
-    def detect_objects_in_frame(self, frame):
+    def detect_objects_in_frame(self, frame: np.ndarray):
         """
         Return a list of object detection results as defined on 
         https://www.tensorflow.org/lite/models/object_detection/overview.
@@ -51,6 +52,6 @@ class ObjectDetectionNode:
 
         return output_data
 
-    def get_labels(self):
+    def get_labels(self) -> List[str]:
         with open(self.label_file, 'r') as f:
             return [line.strip() for line in f.readlines()]
