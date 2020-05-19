@@ -28,7 +28,7 @@ settings = {
 
 
 # This function should probably be moved to a module containing helper functions..?
-def convert_strings_to_proper_type(val: str):
+def convert_strings_to_proper_type(val:str):
     '''Helper function that takes an argument of type string and if the arguments contains a number,
     that can be converted to int or float, returns the converted number. If the arguments contains
     True or False it will return an boolean. If the argument is not of type string an empty string

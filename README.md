@@ -46,6 +46,6 @@ coverage html
 Create test file named `test_<module_to_test>.py` and empty file called `__init__.py` side by side in `tests` folder or any of it's subfolders.
 
 # Formatting
-Run [yapf](https://github.com/google/yapf/) before commits `pipenv run yapf -ri src/`
+Run [yapf](https://github.com/google/yapf/) before commits `pipenv run yapf -ri .`
 
 [pep8 style guide](https://www.python.org/dev/peps/pep-0008/)
