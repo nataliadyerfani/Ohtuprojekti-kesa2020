@@ -17,6 +17,10 @@ class HelpersTest(unittest.TestCase):
         self.assertIsNone(str_convert(0))
 
 
+    def test_str_convert_neg_int_arg(self):
+        self.assertIsNone(str_convert(-1))
+
+
     def test_str_convert_float_arg(self):
         self.assertIsNone(str_convert(12314.1112334))
 
