@@ -26,7 +26,7 @@ or `pipenv run <command>` to run a single command in the environment
 `-l labelmap.txt`
 
 ## Define a webcamera's ID (default: 0)
-'-c camera_id'
+`-c camera_id`
 
 # Testing
 Unit testing with python builtin unittest library. Run with:
@@ -46,6 +46,6 @@ python3 -m unittest discover -s tests
 ```
 
 # Formatting
-Run [yapf](https://github.com/google/yapf/) before commits `yapf -ri src/`
+Run [yapf](https://github.com/google/yapf/) before commits `pipenv run yapf -ri src/`
 
 [pep8 style guide](https://www.python.org/dev/peps/pep-0008/)

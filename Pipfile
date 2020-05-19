@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+yapf = "==0.30.0"
 
 [packages]
 numpy = "==1.18.4"
@@ -62,7 +63,6 @@ coverage = "==5.1"
 #vcstools = "==0.1.42"
 #wrapt = "==1.12.1"
 #wstool = "==0.1.17"
-#yapf = "==0.30.0"
 #zipp = "==3.1.0"
 #Cycler = "==0.10.0"
 #Django = "==3.0.6"
