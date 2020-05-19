@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 import cv2
 from typing import List
 
-DEFAULT_VIDEO_ID = 0
+DEFAULT_VIDEO_ID = -1
 DEFAULT_MODEL = 'detect.tflite'
 DEFAULT_LABELS = 'labelmap.txt'
 
