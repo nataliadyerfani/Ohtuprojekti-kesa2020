@@ -1,6 +1,5 @@
 '''This module provides various helper functions'''
 
-
 from typing import Union
 
 
@@ -10,9 +9,9 @@ def str_convert(val: str) -> Union[str, bool, float, int]:
     True or False it will return an boolean. If the argument is not of type string None will be returned.
     Otherwise a new string object containing the same string will be returned.
     '''
-    if not isinstance(val, str): 
+    if not isinstance(val, str):
         return None
-    
+
     try:
         if 'true' == val.lower(): return True
         if 'false' == val.lower(): return False
