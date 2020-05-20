@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 yapf = "==0.30.0"
 coverage = "==5.1"
+pylint = "== 2.5.2"
 
 [packages]
 numpy = "==1.18.4"
