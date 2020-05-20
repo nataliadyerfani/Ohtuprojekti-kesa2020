@@ -10,16 +10,10 @@ from tools.helpers import str_convert
 
 # Default settings for the application can be set here
 # Directories
-paths = {
-    'SETTINGS': 'config',
-    'IMAGES': 'images',
-    'DATA': 'data'
-}
+paths = {'SETTINGS': 'config', 'IMAGES': 'images', 'DATA': 'data'}
 
 # Filenames
-filenames = {
-    'SETTINGS': 'settings'
-}
+filenames = {'SETTINGS': 'settings'}
 
 # Various settings
 settings = {
@@ -31,7 +25,6 @@ settings = {
 
 class Initializer():
     '''Class that holds static methods to help with initializing'''
-
     def initialize_directories(paths: Dict[str, str]) -> None:
         print('Configured directories:')
         for key, directory in paths.items():
@@ -46,10 +39,9 @@ class Initializer():
         print('All directories initialized.')
         print()
 
-
     def read_settings(file_path: str,
-                    comment_sign: str = '#',
-                    assignment_sign: str = '=') -> List[Tuple[str, str]]:
+                      comment_sign: str = '#',
+                      assignment_sign: str = '=') -> List[Tuple[str, str]]:
         '''Reads the file specified as the argument "file_path" and creates a List containing one
         tuple for every setting.
         File should be of the following format:
@@ -60,12 +52,11 @@ class Initializer():
         If the file is empty or could not be read returns an empty List.
         '''
         settings = []
-        
+
         for l in fileio.read_file_lines(file_path):
             # Skip empty, faulty and commentlines
             # Valid lines contains exactly one assignment sign: =
-            if (not l
-                    or l.startswith(comment_sign)
+            if (not l or l.startswith(comment_sign)
                     or l.count(assignment_sign) != 1):
                 continue
 
@@ -84,62 +75,66 @@ class Configuration():
         '''Constructor. After the object has been created the object will be assigned to the class variable singleton_obj.
         '''
         if Configuration.singleton_obj:
-            raise RuntimeError('Settings object already created, cannot instantiate a new one. Please use the existing one.')
+            raise RuntimeError(
+                'Settings object already created, cannot instantiate a new one. Please use the existing one.'
+            )
             #del self
             #return
-        
+
         self.paths = paths.copy()
         self.filenames = filenames.copy()
         self.settings = settings.copy()
-        
+
         Initializer.initialize_directories(self.paths)
-        
+
         if load_from_file:
             self.load_settings_from_file()
-        
-        Configuration.singleton_obj = self
 
+        Configuration.singleton_obj = self
 
     def load_settings_from_file(self) -> None:
         '''Reads the settings, converts them into the right type and loads them'''
-        settings_file = fileio.build_path(self.paths['SETTINGS'], self.filenames['SETTINGS'])
+        settings_file = fileio.build_path(self.paths['SETTINGS'],
+                                          self.filenames['SETTINGS'])
         print(f'Using settings file \'./{settings_file}\'.')
 
-        settings_read = Initializer.read_settings(settings_file,
-                                            self.settings['settings_comment_sign'],
-                                            self.settings['settings_assignment_sign'])
-        
+        settings_read = Initializer.read_settings(
+            settings_file, self.settings['settings_comment_sign'],
+            self.settings['settings_assignment_sign'])
+
         if len(settings_read) != 0:
             print(f'Using {len(settings_read)} setting(s) from file:')
 
             # The list contains tuples, but we still need to unpack them with map here
-            for var, val in map(lambda pair: (pair[0], str_convert(pair[1])), settings_read):
+            for var, val in map(lambda pair: (pair[0], str_convert(pair[1])),
+                                settings_read):
                 print(var, '=', val, 'loaded from disk.')
                 self.settings[var] = val
         else:
             print('No settings loaded, using default values.')
         print()
 
-
     def __str__(self) -> str:
         def join_helper(pair):
             return '='.join(pair)
-        
-        paths_vars = 'Paths:\n' + '\n'.join((map(join_helper, self.paths.items())))
-        files_vars = 'Files:\n' + '\n'.join((map(join_helper, self.filenames.items())))
-        # Settings dictionary can contain values that are not type(str) -> map to strings
-        settings_vars = 'Settings:\n' + '\n'.join(
-            (map(join_helper, map(lambda t: (t[0], str(t[1])), self.settings.items())))
-        )
-        
-        return '\n\n'.join(('Loaded settings:', paths_vars, files_vars, settings_vars))
 
+        paths_vars = 'Paths:\n' + '\n'.join(
+            (map(join_helper, self.paths.items())))
+        files_vars = 'Files:\n' + '\n'.join(
+            (map(join_helper, self.filenames.items())))
+        # Settings dictionary can contain values that are not type(str) -> map to strings
+        settings_vars = 'Settings:\n' + '\n'.join((map(
+            join_helper, map(lambda t:
+                             (t[0], str(t[1])), self.settings.items()))))
+
+        return '\n\n'.join(
+            ('Loaded settings:', paths_vars, files_vars, settings_vars))
 
     def get_instance(self):
         return Configuration.get_instance()
 
-
     @staticmethod
-    def get_instance(): #-> Optional[Configuration]: <- fails with error: name 'Configuration' is not defined ??
+    def get_instance(
+    ):  #-> Optional[Configuration]: <- fails with error: name 'Configuration' is not defined ??
         '''Static method that returns the only instance of this class.'''
         return Configuration.singleton_obj
