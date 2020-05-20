@@ -39,11 +39,13 @@ class Initializer():
         print('All directories initialized.')
         print()
 
-    def read_settings(file_path: str,
+    def filter_map_settings(settings_list: List[str],
                       comment_sign: str = '#',
                       assignment_sign: str = '=') -> List[Tuple[str, str]]:
-        '''Reads the file specified as the argument "file_path" and creates a List containing one
-        tuple for every setting.
+        '''This function takes one list containing lines read from a settings file. It filters
+        out the comments and faulty lines and returns a list containing tuples where each tuple
+        represents a variable and value pair.
+        
         File should be of the following format:
         variable1=value
         variablen=value
@@ -51,18 +53,15 @@ class Initializer():
         Returns a list of tuples, each one containing a variable and value pair.
         If the file is empty or could not be read returns an empty List.
         '''
-        settings = []
-
-        for l in fileio.read_file_lines(file_path):
-            # Skip empty, faulty and commentlines
-            # Valid lines contains exactly one assignment sign: =
-            if (not l or l.startswith(comment_sign)
-                    or l.count(assignment_sign) != 1):
-                continue
-
-            settings.append(tuple(map(str.strip, l.split(assignment_sign))))
-
-        return settings
+        def valid_line_filter(line: str) -> bool:
+            '''Returns False for lines that are empty or starts with commentsign and
+            all lines that does not have exactly one assignment sign('=')
+            '''
+            if not line: return False
+            return (not line.startswith(comment_sign)) and line.count(assignment_sign) == 1
+        
+        settings = filter(valid_line_filter, settings_list)
+        return list(tuple(map(str.strip, l.split(assignment_sign))) for l in settings)
 
 
 class Configuration():
@@ -98,10 +97,10 @@ class Configuration():
                                           self.filenames['SETTINGS'])
         print(f'Using settings file \'./{settings_file}\'.')
 
-        settings_read = Initializer.read_settings(
-            settings_file, self.settings['settings_comment_sign'],
+        settings_read = Initializer.filter_map_settings(fileio.read_file_lines(settings_file),
+            self.settings['settings_comment_sign'],
             self.settings['settings_assignment_sign'])
-
+        
         if len(settings_read) != 0:
             print(f'Using {len(settings_read)} setting(s) from file:')
 
@@ -113,6 +112,7 @@ class Configuration():
         else:
             print('No settings loaded, using default values.')
         print()
+
 
     def __str__(self) -> str:
         def join_helper(pair):
