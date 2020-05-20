@@ -3,8 +3,8 @@
 ## Commands for virtual environment
 [pipenv](https://github.com/pypa/pipenv) is used for managing dependencies
 
-#### Creating virtual environment
-`pipenv install`
+#### Creating virtual environment for development
+`pipenv install --dev`
 
 #### Activate virtual environment
 `pipenv shell`
