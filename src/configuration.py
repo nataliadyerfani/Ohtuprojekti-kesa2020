@@ -39,9 +39,10 @@ class Initializer():
         print('All directories initialized.')
         print()
 
-    def filter_map_settings(settings_list: List[str],
-                      comment_sign: str = '#',
-                      assignment_sign: str = '=') -> List[Tuple[str, str]]:
+    def filter_map_settings(
+            settings_list: List[str],
+            comment_sign: str = '#',
+            assignment_sign: str = '=') -> List[Tuple[str, str]]:
         '''This function takes one list containing lines read from a settings file. It filters
         out the comments and faulty lines and returns a list containing tuples where each tuple
         represents a variable and value pair.
@@ -58,22 +59,25 @@ class Initializer():
             all lines that does not have exactly one assignment sign('=')
             '''
             if not line: return False
-            return (not line.startswith(comment_sign)) and line.count(assignment_sign) == 1
-        
+            return (not line.startswith(comment_sign)
+                    ) and line.count(assignment_sign) == 1
+
         settings = filter(valid_line_filter, settings_list)
-        return list(tuple(map(str.strip, l.split(assignment_sign))) for l in settings)
+        return list(
+            tuple(map(str.strip, l.split(assignment_sign))) for l in settings)
 
 
 class Configuration():
     '''Class that holds all settings. By default loads settings from disk.
     Only one instance should be created of this class and that object is assigned
-    to the class variable Configuration.singleton_obj .'''
-    singleton_obj = None
+    to the class variable Configuration._singleton_obj .'''
+
+    _singleton_obj = None
 
     def __init__(self, load_from_file: bool = True) -> None:
-        '''Constructor. After the object has been created the object will be assigned to the class variable singleton_obj.
+        '''Constructor. After the object has been created the object will be assigned to the class variable _singleton_obj.
         '''
-        if Configuration.singleton_obj:
+        if Configuration._singleton_obj:
             raise RuntimeError(
                 'Settings object already created, cannot instantiate a new one. Please use the existing one.'
             )
@@ -89,7 +93,7 @@ class Configuration():
         if load_from_file:
             self.load_settings_from_file()
 
-        Configuration.singleton_obj = self
+        Configuration._singleton_obj = self
 
     def load_settings_from_file(self) -> None:
         '''Reads the settings, converts them into the right type and loads them'''
@@ -97,10 +101,11 @@ class Configuration():
                                           self.filenames['SETTINGS'])
         print(f'Using settings file \'./{settings_file}\'.')
 
-        settings_read = Initializer.filter_map_settings(fileio.read_file_lines(settings_file),
+        settings_read = Initializer.filter_map_settings(
+            fileio.read_file_lines(settings_file),
             self.settings['settings_comment_sign'],
             self.settings['settings_assignment_sign'])
-        
+
         if len(settings_read) != 0:
             print(f'Using {len(settings_read)} setting(s) from file:')
 
@@ -112,7 +117,6 @@ class Configuration():
         else:
             print('No settings loaded, using default values.')
         print()
-
 
     def __str__(self) -> str:
         def join_helper(pair):
@@ -137,4 +141,4 @@ class Configuration():
     def get_instance(
     ):  #-> Optional[Configuration]: <- fails with error: name 'Configuration' is not defined ??
         '''Static method that returns the only instance of this class.'''
-        return Configuration.singleton_obj
+        return Configuration._singleton_obj
